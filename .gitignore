@@ -1,0 +1,13 @@
+# backup and temporary files
+*swp
+*~
+*bak
+00sandbox/
+
+# IDE related - eclipse 
+.classpath
+.project
+.settings/
+
+# maven
+target/
