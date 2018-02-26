@@ -1,4 +1,4 @@
-# Company Transfer Web Rest Service
+# Company Transfer Web Rest Service - v1.2
 ## Abstract
 Rest service that allows:
 * Creation of monetary accounts with an initial non negative balance
@@ -139,3 +139,11 @@ Rest service that allows:
    * Queries are unsorted;
    * Failed transfers are logged in the System.err output, but not registered in the Database;
 
+## Changes from previous version (1.0)
+### Concurrent Domain Entities creation test class
+   * A new test class was created to allow test of concurrent access to TransferService create funcions
+   * long id of Account and Transfer were replaced by wrapper Long
+   * New method findByName added to IAccountRepository
+   * Removed Mockito from TransferServiceTest, created a MockRepository for testing purposes.
+      * This MockRespository implements CrudRepository interface persisting the data on a LinkedHashMap.
+      * The Template Pattern was used, an AbstractMockRepository was created to provide all commom methods while Account and Transfer specializations enable the required behavior for each entity persistence.
