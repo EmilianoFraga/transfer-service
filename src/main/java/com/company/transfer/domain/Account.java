@@ -23,7 +23,7 @@ import com.company.transfer.domain.exception.EntityCreationException;
 public class Account {
     @Id @GeneratedValue(strategy = GenerationType.AUTO) // primary key
     @NotNull // validation constraint
-    private long id;
+    private Long id;
     
     @Version
     private long version;
@@ -60,7 +60,7 @@ public class Account {
 		this.balance = initialBalance;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 

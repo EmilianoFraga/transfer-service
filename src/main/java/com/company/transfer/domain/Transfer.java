@@ -24,7 +24,7 @@ public class Transfer {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO) // primary key
     @NotNull // validation constraint
-    private long id;
+    private Long id;
     
     @Version
     private long version;
@@ -57,7 +57,7 @@ public class Transfer {
 		this.isoTimestamp = LocalDateTime.now().format(TRANSFER_TIMESTAMP_FORMATTER);
 	}
 
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
