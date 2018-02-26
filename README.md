@@ -115,6 +115,24 @@ Rest service that allows:
    *  Transfer : defines the Transfer entity and its basic validation rules;
    *  **Note: All numerical financial data (amount, balances etc) are stored, retrieved and manipulated as BigDecimal instances to keep the required decimal precision.**
 
+## Deployment Instructions
+### System Requirements
+   * Java version: 1.8.0_151
+   * Maven version: 3.3.9
+### Clone the repository from Git 
+   * SSH:
+      * git clone git@github.com:EmilianoFraga/transfer-service.git
+   * HTTPS:
+      * git clone https://github.com/EmilianoFraga/transfer-service.git
+### Go to the project root directory:
+   * cd transfer-service
+### Package the application
+   * mvn clean package
+### After a successful packaging, you can start the application
+   * java -jar target/transfer-service-1.0.jar
+### Database Location
+   * The H2 database files are created at ~/tmp/transfer-service.mv.db and ~/tmp/transfer-service.trace.db
+   
 ## Known Limitations 
    * Application has no Query By methods such as Accounts.findByName, Accounts.findByBalanceFilter, Transfers.findBySourceAccount, Transfers.findByDestinationAccount;
    * Application has no Delete methods;
