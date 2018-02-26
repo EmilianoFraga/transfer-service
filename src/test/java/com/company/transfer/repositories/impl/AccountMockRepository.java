@@ -3,6 +3,7 @@
  */
 package com.company.transfer.repositories.impl;
 
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.company.transfer.domain.Account;
@@ -35,5 +36,14 @@ public class AccountMockRepository extends AbstractMockRepository<Account, Long>
 	@Override
 	protected <R extends Account> Long getValueKey(R value) {
 		return value.getId();
+	}
+
+	@Override
+	public Account findByName(String name) {
+		try {
+			return this.mapRepository.values().stream().filter(a -> a.getName().equals(name)).findFirst().get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
 	}
 }
