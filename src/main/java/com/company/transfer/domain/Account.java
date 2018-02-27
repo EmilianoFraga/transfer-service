@@ -22,7 +22,6 @@ import com.company.transfer.domain.exception.EntityCreationException;
 @Entity
 public class Account {
     @Id @GeneratedValue(strategy = GenerationType.AUTO) // primary key
-    @NotNull // validation constraint
     private Long id;
     
     @Version
@@ -96,7 +95,7 @@ public class Account {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -110,7 +109,10 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (name == null) {
 			if (other.name != null)
