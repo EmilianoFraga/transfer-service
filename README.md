@@ -132,13 +132,32 @@ Rest service that allows:
    * java -jar target/transfer-service-1.0.jar
 ### Database Location
    * The H2 database files are created at ~/tmp/transfer-service.mv.db and ~/tmp/transfer-service.trace.db
-   
+   * H2 DB is confired on file: application.properties 
+   * **The path ~/tmp must exist. If needed change its path on the config file**
+
+## Usage Guidelines
+   * You can use your web browser or curl. Below examples use curl.
+### Simple access
+   curl -i -H 'Content-Type: application/json' http://localhost:8080
+### Query accounts
+   curl -i -H 'Content-Type: application/json' http://localhost:8080/accounts
+### Query transfers
+   curl -i -H 'Content-Type: application/json' http://localhost:8080/transfers
+### Create an account
+   curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/new?name=AccountOne&initialBalance=100"
+   curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/new?name=AccountTwo&initialBalance=300"
+### Create a transfer
+   curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/transfer?sourceId=1&destId=2&amount=50"
+
 ## Known Limitations 
    * Application has no Query By methods such as Accounts.findByName, Accounts.findByBalanceFilter, Transfers.findBySourceAccount, Transfers.findByDestinationAccount;
    * Application has no Delete methods;
    * Queries are unsorted;
    * Failed transfers are logged in the System.err output, but not registered in the Database;
 
+## Changes from previous version (1.2)
+### Concurrent Domain Entities creation test class
+   * Fixed a validation issue with the Long id constraint.
 ## Changes from previous version (1.0)
 ### Concurrent Domain Entities creation test class
    * A new test class was created to allow test of concurrent access to TransferService create funcions
