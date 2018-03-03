@@ -1,4 +1,4 @@
-# Company Transfer Web Rest Service - v1.2
+# Company Transfer Web Rest Service - v1.4
 ## Abstract
 Rest service that allows:
 * Creation of monetary accounts with an initial non negative balance
@@ -155,6 +155,14 @@ Rest service that allows:
    * Queries are unsorted;
    * Failed transfers are logged in the System.err output, but not registered in the Database;
 
+## Changes from previous version (1.3)
+### Concurrent Domain Entities creation test class
+   * Implemented Integrated Test for TransferController class.
+      * Uses SpringBootTest and MockMVC;
+      * This means that running tests will always load Spring Boot, making tests slower;
+      * To avoid loading all the Spring Boot harness on every test run, **TransferControllerTest is not part of default test set**;
+      * **To run TransferControllerTest please use maven as follows:**
+         * ```mvn clean -Dtest=TransferControllerTest test```
 ## Changes from previous version (1.2)
 ### Concurrent Domain Entities creation test class
    * Fixed a validation issue with the Long id constraint.
