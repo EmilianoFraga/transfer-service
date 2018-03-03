@@ -3,10 +3,9 @@
  */
 package com.company.transfer.repositories.impl;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import com.company.transfer.domain.Transfer;
 import com.company.transfer.repositories.ITransferRepository;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Emiliano
@@ -14,7 +13,7 @@ import com.company.transfer.repositories.ITransferRepository;
  */
 public class TransferMockRepository extends AbstractMockRepository<Transfer, Long> implements ITransferRepository {
 
-	private AtomicLong atomicId;
+	final private AtomicLong atomicId;
 
 	public TransferMockRepository() {
 		super();
