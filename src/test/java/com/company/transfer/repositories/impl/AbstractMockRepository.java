@@ -6,6 +6,7 @@ package com.company.transfer.repositories.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.data.repository.CrudRepository;
 
@@ -15,7 +16,7 @@ import org.springframework.data.repository.CrudRepository;
  */
 public abstract class AbstractMockRepository<T extends Object, S extends Serializable> implements CrudRepository<T, S> {
 
-    protected LinkedHashMap<S, T> mapRepository;
+    protected Map<S, T> mapRepository;
 
     public AbstractMockRepository() {
         super();
