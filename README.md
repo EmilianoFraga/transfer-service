@@ -105,7 +105,7 @@ Rest service that allows:
       * Returns an Iterable<Account> for all the persisted Accounts found in the Database;
    1. findAllTransfers
       * Returns an Iterable<Transfer> for all the persisted Tranfers found in the Database;
-   *  **Note: TransferService calls that modifies data are synchronized, having a Transational context allowing data to be rolled back in case of transaction error**
+      *  **Note: TransferService calls that modifies data are synchronized, having a Transational context allowing data to be rolled back in case of transaction error**
 1. The TransferService delegates the persistence / data access calls to a Repository class.
    *  The Repositories interfaces are implemented by Spring's CrudRepository:
       * IAccountRepository  : interface for Account Data Access Methods;
@@ -138,16 +138,16 @@ Rest service that allows:
 ## Usage Guidelines
    * You can use your web browser or curl. Below examples use curl.
 ### Simple access
-   curl -i -H 'Content-Type: application/json' http://localhost:8080
+   * curl -i -H 'Content-Type: application/json' http://localhost:8080
 ### Query accounts
-   curl -i -H 'Content-Type: application/json' http://localhost:8080/accounts
+   * curl -i -H 'Content-Type: application/json' http://localhost:8080/accounts
 ### Query transfers
-   curl -i -H 'Content-Type: application/json' http://localhost:8080/transfers
+   * curl -i -H 'Content-Type: application/json' http://localhost:8080/transfers
 ### Create an account
-   curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/new?name=AccountOne&initialBalance=100"
-   curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/new?name=AccountTwo&initialBalance=300"
+   * curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/new?name=AccountOne&initialBalance=100"
+   * curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/new?name=AccountTwo&initialBalance=300"
 ### Create a transfer
-   curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/transfer?sourceId=1&destId=2&amount=50"
+   * curl -i -H 'Content-Type: application/json' -X PUT "http://localhost:8080/accounts/transfer?sourceId=1&destId=2&amount=50"
 
 ## Known Limitations 
    * Application has no Query By methods such as Accounts.findByName, Accounts.findByBalanceFilter, Transfers.findBySourceAccount, Transfers.findByDestinationAccount;
