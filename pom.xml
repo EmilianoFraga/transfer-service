@@ -4,7 +4,7 @@
     <groupId>com.company.transfer-service</groupId>
     <artifactId>transfer-service</artifactId>
     <packaging>jar</packaging>
-    <version>1.5</version>
+    <version>1.6-SNAPSHOT</version>
     <name>transfer-service</name>
     <url>http://maven.apache.org</url>
     <parent>
