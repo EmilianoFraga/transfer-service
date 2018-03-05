@@ -217,13 +217,12 @@ class EntityCreator <T extends Object> implements Runnable {
 	public void batchCreate() {
 		if (!this.isRunning) {
 			this.thread.start();
+    		this.isRunning = true;
 		}
 	}
 
 	@Override
 	public void run() {
-		this.isRunning = true;
-		
 		// using parallel stream
 		Stream.of(this.entities).parallel().forEach(this.fnCreate::accept);
 		
