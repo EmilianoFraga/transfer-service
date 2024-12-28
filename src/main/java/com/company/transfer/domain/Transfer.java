@@ -1,18 +1,18 @@
 package com.company.transfer.domain;
 
+import com.company.transfer.domain.exception.EntityCreationException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
-
-import com.company.transfer.domain.exception.EntityCreationException;
 
 @Entity
 public class Transfer {
@@ -27,11 +27,13 @@ public class Transfer {
     @Version
     private long version;
 
-    @Column(nullable=false)
-	private long sourceAccountId;
+    @OneToOne(optional=false)
+    @JoinColumn(name = "SOURCE_ACCOUNT_ID") 
+    private Account sourceAccount;
 
-    @Column(nullable=false)
-	private long destinationAccountId;
+    @OneToOne(optional=false)
+    @JoinColumn(name = "DEST_ACCOUNT_ID") 
+    private Account destinationAccount;
 
     @Column(nullable=false)
 	private BigDecimal amount;
@@ -43,12 +45,12 @@ public class Transfer {
     	super();
 	}
 
-	public Transfer(long sourceAccountId, long destinationAccountId, BigDecimal transferAmount) {
-		this.validateBeforeCreation(sourceAccountId, destinationAccountId, transferAmount);
+	public Transfer(Account sourceAccount, Account destinationAccount, BigDecimal transferAmount) {
+		this.validateBeforeCreation(sourceAccount, destinationAccount, transferAmount);
 		
-		this.sourceAccountId = sourceAccountId;
+		this.sourceAccount = sourceAccount;
 		
-		this.destinationAccountId = destinationAccountId;
+		this.destinationAccount = destinationAccount;
 		
 		this.amount = transferAmount;
 		
@@ -71,20 +73,20 @@ public class Transfer {
 		this.version = version;
 	}
 
-	public long getSourceAccountId() {
-		return this.sourceAccountId;
+	public Account getSourceAccount() {
+		return this.sourceAccount;
 	}
 
-	public void setSourceAccountId(long sourceAccountId) {
-		this.sourceAccountId = sourceAccountId;
+	public void setSourceAccount(Account sourceAccount) {
+		this.sourceAccount = sourceAccount;
 	}
 
-	public long getDestinationAccountId() {
-		return this.destinationAccountId;
+	public Account getDestinationAccount() {
+		return this.destinationAccount;
 	}
 
-	public void setDestinationAccountId(long destinationAccountId) {
-		this.destinationAccountId = destinationAccountId;
+	public void setDestinationAccountId(Account destinationAccount) {
+		this.destinationAccount = destinationAccount;
 	}
 
 	public BigDecimal getAmount() {
@@ -131,9 +133,9 @@ public class Transfer {
 	/**
 	 * Helper method to validate business data before entity creation 
 	 */
-	private void validateBeforeCreation(long sourceAccountId, long destinationAccountId, BigDecimal transferAmount) throws EntityCreationException {
+	private void validateBeforeCreation(Account sourceAccount, Account destinationAccount, BigDecimal transferAmount) throws EntityCreationException {
 		try {
-			if (sourceAccountId == destinationAccountId) {
+			if (sourceAccount.equals(destinationAccount)) {
 				throw new EntityCreationException("Source and Destination account cannot be the same");
 			}
 			

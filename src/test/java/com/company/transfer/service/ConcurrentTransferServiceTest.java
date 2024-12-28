@@ -104,44 +104,44 @@ public class ConcurrentTransferServiceTest {
 	
 	@Test
 	public void testConcurrentTransfers() throws InterruptedException {
-		this.transferService.createNewAccount("A", AMOUNT_1000);
-		this.transferService.createNewAccount("B", AMOUNT_1000);
-		this.transferService.createNewAccount("C", AMOUNT_1000);
+		Account accountA = this.transferService.createNewAccount("A", AMOUNT_1000);
+		Account accountB = this.transferService.createNewAccount("B", AMOUNT_1000);
+		Account accountC = this.transferService.createNewAccount("C", AMOUNT_1000);
 		
 		Transfer[][] transfers = {
 			new Transfer[] {
-					new Transfer(1, 2, AMOUNT_100),
-					new Transfer(1, 2, AMOUNT_100),
-					new Transfer(1, 2, AMOUNT_100),
-					new Transfer(1, 2, AMOUNT_100),
-					new Transfer(1, 2, AMOUNT_100),
-					new Transfer(1, 2, AMOUNT_100),
-					new Transfer(1, 2, AMOUNT_100),
-					new Transfer(1, 2, AMOUNT_100),
+					new Transfer(accountA, accountB, AMOUNT_100),
+					new Transfer(accountA, accountB, AMOUNT_100),
+					new Transfer(accountA, accountB, AMOUNT_100),
+					new Transfer(accountA, accountB, AMOUNT_100),
+					new Transfer(accountA, accountB, AMOUNT_100),
+					new Transfer(accountA, accountB, AMOUNT_100),
+					new Transfer(accountA, accountB, AMOUNT_100),
+					new Transfer(accountA, accountB, AMOUNT_100),
 			},
 			
 			new Transfer[] {
-					new Transfer(3, 1, AMOUNT_10),
-					new Transfer(3, 1, AMOUNT_10),
-					new Transfer(3, 1, AMOUNT_10),
-					new Transfer(3, 1, AMOUNT_10),
-					new Transfer(3, 1, AMOUNT_10),
-					new Transfer(3, 1, AMOUNT_10),
-					new Transfer(3, 1, AMOUNT_10),
-					new Transfer(3, 1, AMOUNT_10),
+					new Transfer(accountC, accountA, AMOUNT_10),
+					new Transfer(accountC, accountA, AMOUNT_10),
+					new Transfer(accountC, accountA, AMOUNT_10),
+					new Transfer(accountC, accountA, AMOUNT_10),
+					new Transfer(accountC, accountA, AMOUNT_10),
+					new Transfer(accountC, accountA, AMOUNT_10),
+					new Transfer(accountC, accountA, AMOUNT_10),
+					new Transfer(accountC, accountA, AMOUNT_10),
 			},
 			
 			new Transfer[] {
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
-					new Transfer(2, 3, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
+					new Transfer(accountB, accountC, AMOUNT_50),
 			},
 		};
 		
@@ -188,7 +188,7 @@ public class ConcurrentTransferServiceTest {
 	}
 	
 	private void helperFnCreateTransfer(Transfer t) {
-		this.transferService.transfer(t.getSourceAccountId(), t.getDestinationAccountId(), t.getAmount());
+		this.transferService.transfer(t.getSourceAccount().getId(), t.getDestinationAccount().getId(), t.getAmount());
 	}
 }
 

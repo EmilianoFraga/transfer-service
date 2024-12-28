@@ -1,19 +1,17 @@
 package com.company.transfer.service;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.company.transfer.domain.Account;
 import com.company.transfer.domain.Transfer;
 import com.company.transfer.domain.exception.EntityCreationException;
 import com.company.transfer.repositories.IAccountRepository;
 import com.company.transfer.repositories.ITransferRepository;
 import com.company.transfer.service.exception.TransferServiceException;
+import java.math.BigDecimal;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TransferService {
@@ -68,10 +66,10 @@ public class TransferService {
 			
 			destinationAccount.add(transferAmount);
 			
-			this.accountRepository.save(sourceAccount);
-			this.accountRepository.save(destinationAccount);
+			sourceAccount = this.accountRepository.save(sourceAccount);
+			destinationAccount = this.accountRepository.save(destinationAccount);
 			
-			Transfer transfer = new Transfer(sourceAccount.getId(), destinationAccount.getId(), transferAmount);
+			Transfer transfer = new Transfer(sourceAccount, destinationAccount, transferAmount);
 			return this.transferRepository.save(transfer);
 		} catch (EntityCreationException | NullPointerException e) {
 			throw new TransferServiceException(e);

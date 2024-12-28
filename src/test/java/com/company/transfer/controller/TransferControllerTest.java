@@ -177,8 +177,8 @@ public class TransferControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].sourceAccountId", is(1)))
-                .andExpect(jsonPath("$[0].destinationAccountId", is(2)))
+                .andExpect(jsonPath("$[0].sourceAccount.id", is(1)))
+                .andExpect(jsonPath("$[0].destinationAccount.id", is(2)))
                 .andExpect(jsonPath("$[0].amount", is(10.0)))
                 ;
 

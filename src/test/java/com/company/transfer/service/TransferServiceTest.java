@@ -62,16 +62,19 @@ public class TransferServiceTest {
 
     @Test
     public void testTransfer() throws Exception {
-        BigDecimal balanceOne = this.accountRepository.findOne(1L).getBalance().subtract(AMOUNT_10);
-        BigDecimal balanceTwo = this.accountRepository.findOne(2L).getBalance().add(AMOUNT_10);
+        Account accountOne = this.accountRepository.findOne(1L);
+        Account accountTwo = this.accountRepository.findOne(2L);
+        
+        BigDecimal balanceOne = accountOne.getBalance().subtract(AMOUNT_10);
+        BigDecimal balanceTwo = accountTwo.getBalance().add(AMOUNT_10);
 
         Transfer transfer = this.transferService.transfer(1L, 2L, AMOUNT_10);
 
-        assertEquals(balanceOne, this.accountRepository.findOne(1L).getBalance());
-        assertEquals(balanceTwo, this.accountRepository.findOne(2L).getBalance());
+        assertEquals(balanceOne, accountOne.getBalance());
+        assertEquals(balanceTwo, accountTwo.getBalance());
 
-        assertEquals(1L, transfer.getSourceAccountId());
-        assertEquals(2L, transfer.getDestinationAccountId());
+        assertEquals(accountOne, transfer.getSourceAccount());
+        assertEquals(accountTwo, transfer.getDestinationAccount());
         assertEquals(AMOUNT_10, transfer.getAmount());
     }
 

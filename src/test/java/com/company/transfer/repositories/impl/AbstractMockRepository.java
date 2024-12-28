@@ -84,7 +84,7 @@ public abstract class AbstractMockRepository<T extends Object, S extends Seriali
 
         if (key == null) {
             key = this.createNewKey();
-            this.setValueID(value, key);
+            value = this.setValueID(value, key);
         }
 
         this.mapRepository.put(key, value);

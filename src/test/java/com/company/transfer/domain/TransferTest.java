@@ -4,11 +4,10 @@ import static com.company.transfer.testutils.AmountConstants.AMOUNT_1000;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 
 public class TransferTest {
@@ -31,13 +30,13 @@ public class TransferTest {
 	
 	@Test
 	public void testHashCode() throws Exception {
-		Transfer transferTestOne = new Transfer(this.accountOne.getId(), this.accountTwo.getId(), AMOUNT_1000);
+		Transfer transferTestOne = new Transfer(this.accountOne, this.accountTwo, AMOUNT_1000);
 		transferTestOne.setId(1);		
 
 		// same as TestOne, but different balance
 		Transfer transferSameTestOne = this.helperTransferCreator(transferTestOne);
 		
-		Transfer transferTestTwo = new Transfer(this.accountOne.getId(), this.accountTwo.getId(), AMOUNT_1000);
+		Transfer transferTestTwo = new Transfer(this.accountOne, this.accountTwo, AMOUNT_1000);
 		transferTestTwo.setId(2);
 		
 		// same as TestTwo, but different balance
@@ -55,13 +54,13 @@ public class TransferTest {
 
 	@Test
 	public void testEquals() throws Exception {
-		Transfer transferTestOne = new Transfer(this.accountOne.getId(), this.accountTwo.getId(), AMOUNT_1000);
+		Transfer transferTestOne = new Transfer(this.accountOne, this.accountTwo, AMOUNT_1000);
 		transferTestOne.setId(1);		
 
 		// same as TestOne, but different balance
 		Transfer transferSameTestOne = this.helperTransferCreator(transferTestOne);
 		
-		Transfer transferTestTwo = new Transfer(this.accountOne.getId(), this.accountTwo.getId(), AMOUNT_1000);
+		Transfer transferTestTwo = new Transfer(this.accountOne, this.accountTwo, AMOUNT_1000);
 		transferTestTwo.setId(2);
 		
 		// same as TestTwo, but different balance
@@ -78,7 +77,7 @@ public class TransferTest {
 	}
 
 	private Transfer helperTransferCreator(Transfer other) {
-		Transfer transfer = new Transfer(other.getSourceAccountId(), other.getDestinationAccountId(), other.getAmount());
+		Transfer transfer = new Transfer(other.getSourceAccount(), other.getDestinationAccount(), other.getAmount());
 		transfer.setId(other.getId());
 		
 		return transfer;
